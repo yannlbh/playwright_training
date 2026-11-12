@@ -1,0 +1,5 @@
+import pytest
+
+[pytest]
+addopts = --headed --browser chromium --base-url https://www.qapractice.com
+testpaths = exercises
