@@ -7,6 +7,8 @@ class LoginPage:
         self.input_password = page.get_by_test_id("login-password") #input for password login
         self.button_login = page.get_by_test_id("login-submit") #button to submit login
         self.success_login_message = page.get_by_test_id("login-success") #message when success login
+        self.error_login_message = page.get_by_test_id("login-error") #error message for wrong credentials
+
 
     def open_login_page(self):
         self.page.goto("/practice-login-form") #direct the page to login form
