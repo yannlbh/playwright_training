@@ -74,3 +74,19 @@ def test_tc04_invalid_login_empty_email(init_login_page):
     init_login_page.login("", VALID_PASSWORD)  # login with no email and valid password
     expect(init_login_page.error_login_message).to_contain_text("Email is required")  # check the error message
 
+def test_tc05_invalid_login_invalid_credential(init_login_page):
+    """
+
+    :param init_login_page:
+    :return:
+
+    Steps:
+      1. Enter wrong@example.com
+      2. Enter a wrong password
+      3. Click Sign in
+
+    Expected: Error "Invalid email id and password" is shown; no success message.
+    """
+    init_login_page.login("wrong@email", "wrong password")  # login with wrong email and password
+    expect(init_login_page.error_login_message).to_contain_text("Invalid email id and password")  # check the error message
+
