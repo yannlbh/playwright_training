@@ -42,3 +42,18 @@ def test_tc02_invalid_login_empty_fields(init_login_page):
     init_login_page.login("", "")  # login with the email and password empty
     expect(init_login_page.error_login_message).to_contain_text("Email and Password are required")  # check the error message
 
+def test_tc03_invalid_login_empty_password(init_login_page):
+    """
+
+    :param init_login_page:
+    :return:
+
+    Steps:
+      1. Enter a valid email
+      2. Leave password empty
+      3. Click Sign in
+
+    Expected: Error "Password is required" is shown.
+    """
+    init_login_page.login(VALID_EMAIL, "")  # login with valid email and no password
+    expect(init_login_page.error_login_message).to_contain_text("Password is required")  # check the error message
