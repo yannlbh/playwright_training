@@ -1,7 +1,10 @@
+from time import sleep
+
 import pytest
 from playwright.sync_api import Page, expect
 from exercises.practice_forms.form_page import FormPage
 
+# region Entry values
 VALID_COUNTRY = "United States"
 VALID_TITLE = "Mr."
 VALID_FIRST_NAME = "John"
@@ -11,6 +14,20 @@ VALID_DOJ = "17/10/2026"
 VALID_EMAIL = "validemail@gmail.com"
 VALID_PHONE_CODE = "+1"
 VALID_PHONE_NUMBER = "555-123-4567"
+#endregion
+
+#region Success / errors messages
+SUCCESS_MESSAGE_SUBMIT = "Details Successfully Added!"
+ERROR_MESSAGE_COUNTRY = "Country of Residence is required"
+ERROR_MESSAGE_TITLE = "Title is required"
+ERROR_MESSAGE_FIRST_NAME = "First Name is required"
+ERROR_MESSAGE_LAST_NAME = "Last Name is required"
+ERROR_MESSAGE_DOB = "Date of Birth is required"
+ERROR_MESSAGE_DOJ = "Date of Joining is required (dd/mm/yyyy)"
+ERROR_MESSAGE_EMAIL = "Email Address is required"
+ERROR_MESSAGE_PHONE_NUMBER = "Phone Number is required"
+ERROR_MESSAGE_PREF_COMM_METHOD = "Please select a Communication Preference"
+#endregion
 
 @pytest.fixture
 def init_form_page(page:Page):
@@ -34,8 +51,7 @@ def test_TC01_valid_form(init_form_page):
     """
     init_form_page.fill_form(VALID_COUNTRY, VALID_TITLE, VALID_FIRST_NAME, VALID_LAST_NAME, VALID_DOB, VALID_DOJ, VALID_EMAIL, VALID_PHONE_CODE, VALID_PHONE_NUMBER,True)
     init_form_page.submit()
-    expect(init_form_page.success_submit_message).to_contain_text("Details Successfully Added!")
-
+    expect(init_form_page.success_submit_message).to_contain_text(SUCCESS_MESSAGE_SUBMIT)
 
 def test_TC02_empty_form(init_form_page):
     """
@@ -49,7 +65,18 @@ def test_TC02_empty_form(init_form_page):
 
     Expected: A "required" error appears under each mandatory field.
     """
-    pass
+    init_form_page.fill_form()
+    init_form_page.submit()
+    expect(init_form_page.get_error_message_locator(ERROR_MESSAGE_COUNTRY)).to_be_visible()
+    expect(init_form_page.get_error_message_locator(ERROR_MESSAGE_TITLE)).to_be_visible()
+    expect(init_form_page.get_error_message_locator(ERROR_MESSAGE_FIRST_NAME)).to_be_visible()
+    expect(init_form_page.get_error_message_locator(ERROR_MESSAGE_LAST_NAME)).to_be_visible()
+    expect(init_form_page.get_error_message_locator(ERROR_MESSAGE_DOB)).to_be_visible()
+    expect(init_form_page.get_error_message_locator(ERROR_MESSAGE_DOJ)).to_be_visible()
+    expect(init_form_page.get_error_message_locator(ERROR_MESSAGE_EMAIL)).to_be_visible()
+    expect(init_form_page.get_error_message_locator(ERROR_MESSAGE_PHONE_NUMBER)).to_be_visible()
+    expect(init_form_page.get_error_message_locator(ERROR_MESSAGE_PREF_COMM_METHOD)).to_be_visible()
+
 
 
 def test_TC03_invalid_email(init_form_page):
@@ -67,7 +94,6 @@ def test_TC03_invalid_email(init_form_page):
     """
     pass
 
-
 def test_TC04_invalid_doj(init_form_page):
     """
 
@@ -82,7 +108,6 @@ def test_TC04_invalid_doj(init_form_page):
     Expected: Error "Date of Joining format should be dd/mm/yyyy" is shown.
     """
     pass
-
 
 def test_TC05_missing_comm_pref(init_form_page):
     """
@@ -99,7 +124,6 @@ def test_TC05_missing_comm_pref(init_form_page):
     """
     pass
 
-
 def test_TC06_country_dropdown_op(init_form_page):
     """
 
@@ -113,7 +137,6 @@ def test_TC06_country_dropdown_op(init_form_page):
 
     """
     pass
-
 
 def test_TC07_clear_form(init_form_page):
     """
@@ -129,7 +152,6 @@ def test_TC07_clear_form(init_form_page):
 
     """
     pass
-
 
 def test_TC08_exlusive_radio_button(init_form_page):
     """
