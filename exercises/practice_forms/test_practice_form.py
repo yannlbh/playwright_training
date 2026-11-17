@@ -111,7 +111,10 @@ def test_TC04_invalid_doj(init_form_page):
 
     Expected: Error "Date of Joining format should be dd/mm/yyyy" is shown.
     """
-    pass
+    init_form_page.fill_form(VALID_COUNTRY, VALID_TITLE, VALID_FIRST_NAME, VALID_LAST_NAME, VALID_DOB, "2021-06-01", VALID_EMAIL, VALID_PHONE_CODE, VALID_PHONE_NUMBER,True)
+    init_form_page.submit()
+    expect(init_form_page.get_error_message_locator("Date of Joining format should be dd/mm/yyyy")).to_be_visible()
+
 
 def test_TC05_missing_comm_pref(init_form_page):
     """
