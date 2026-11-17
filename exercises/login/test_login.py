@@ -90,3 +90,18 @@ def test_tc05_invalid_login_invalid_credential(init_login_page):
     init_login_page.login("wrong@email", "wrong password")  # login with wrong email and password
     expect(init_login_page.error_login_message).to_contain_text("Invalid email id and password")  # check the error message
 
+def test_tc06_password_masked(init_login_page):
+    """
+
+    :param init_login_page:
+    :return:
+
+    Steps:
+      1.Type any value into the password field
+
+    Expected: The characters are obscured (input type="password").
+    """
+    init_login_page.input_password.fill("password")
+    expect(init_login_page.input_password).to_have_attribute("type","password")
+
+
