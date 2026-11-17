@@ -16,6 +16,8 @@ class FormPage(Page):
         self.pref_comm_method_phone = page.get_by_test_id("forms-comm-phone")
         self.clear_button = page.get_by_test_id("forms-clear")
         self.submit_button = page.get_by_test_id("forms-submit")
+        self.success_submit_message = page.get_by_test_id("forms-success")
+
 
     def open_form_page(self):
         self.page.goto("/practice-forms")

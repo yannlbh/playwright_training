@@ -1,8 +1,16 @@
 import pytest
-from playwright.sync_api import Page
-
+from playwright.sync_api import Page, expect
 from exercises.practice_forms.form_page import FormPage
 
+VALID_COUNTRY = "United States"
+VALID_TITLE = "Mr."
+VALID_FIRST_NAME = "John"
+VALID_LAST_NAME = "Smith"
+VALID_DOB = "2002-01-01"
+VALID_DOJ = "17/10/2026"
+VALID_EMAIL = "validemail@gmail.com"
+VALID_PHONE_CODE = "+1"
+VALID_PHONE_NUMBER = "555-123-4567"
 
 @pytest.fixture
 def init_form_page(page:Page):
@@ -24,7 +32,9 @@ def test_TC01_valid_form(init_form_page):
 
     Expected: Success message "Details Successfully Added!" is shown.
     """
-    pass
+    init_form_page.fill_form(VALID_COUNTRY, VALID_TITLE, VALID_FIRST_NAME, VALID_LAST_NAME, VALID_DOB, VALID_DOJ, VALID_EMAIL, VALID_PHONE_CODE, VALID_PHONE_NUMBER,True)
+    init_form_page.submit()
+    expect(init_form_page.success_submit_message).to_contain_text("Details Successfully Added!")
 
 
 def test_TC02_empty_form(init_form_page):
