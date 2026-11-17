@@ -145,7 +145,12 @@ def test_TC06_country_dropdown_op(init_form_page):
     Expected: Options include United States, Canada, United Kingdom, India, Australia, Other.
 
     """
-    pass
+    init_form_page.country_form.select_option("United States")
+    init_form_page.country_form.select_option("Canada")
+    init_form_page.country_form.select_option("United Kingdom")
+    init_form_page.country_form.select_option("India")
+    init_form_page.country_form.select_option("Australia")
+    init_form_page.country_form.select_option("Other")
 
 def test_TC07_clear_form(init_form_page):
     """
