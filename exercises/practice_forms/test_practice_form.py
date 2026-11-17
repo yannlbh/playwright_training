@@ -165,7 +165,18 @@ def test_TC07_clear_form(init_form_page):
     Expected: All fields return to their empty/default state.
 
     """
-    pass
+    init_form_page.fill_form(VALID_COUNTRY, VALID_TITLE, VALID_FIRST_NAME, VALID_LAST_NAME, VALID_DOB, VALID_DOJ,
+                             VALID_EMAIL, VALID_PHONE_CODE, VALID_PHONE_NUMBER, True)
+    init_form_page.clear()
+    for dropdown in [init_form_page.country_form,init_form_page.title_form] :
+        expect(dropdown).to_have_value("")
+    for field in [init_form_page.first_name,init_form_page.last_name,init_form_page.date_of_birth,init_form_page.date_of_joining,init_form_page.email,init_form_page.phone_number,init_form_page.phone_number]:
+        expect(field).to_be_empty()
+    expect(init_form_page.phone_code_form).to_have_value("+1")
+    for checkBox in [init_form_page.pref_comm_method_phone,init_form_page.pref_comm_method_email]:
+        expect(checkBox).not_to_be_checked()
+
+
 
 def test_TC08_exlusive_radio_button(init_form_page):
     """
