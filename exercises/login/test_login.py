@@ -118,4 +118,16 @@ def test_tc07_forgot_password_nav(init_login_page):
     init_login_page.forgot_password()
     expect(init_login_page.page).to_have_url("/forget-password")
 
+def test_tc08_register_nav(init_login_page):
+    """
 
+    :param init_login_page:
+    :return:
+
+    steps:
+    1. Click the "Register now" link
+
+    Expected: The browser navigates to /register.
+    """
+    init_login_page.register()
+    expect(init_login_page.page).to_have_url("/register")

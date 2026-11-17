@@ -25,4 +25,4 @@ class LoginPage:
         self.button_forgot_password.click()
 
     def register(self):
-        self.button_forgot_password.click()
+        self.button_register.click()
