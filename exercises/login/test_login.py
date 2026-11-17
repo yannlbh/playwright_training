@@ -104,4 +104,18 @@ def test_tc06_password_masked(init_login_page):
     init_login_page.input_password.fill("password")
     expect(init_login_page.input_password).to_have_attribute("type","password")
 
+def test_tc07_forgot_password_nav(init_login_page):
+    """
+
+    :param init_login_page:
+    :return:
+
+    Steps:
+      1. Click the "Forgot password?" link
+
+    Expected: The browser navigates to /forget-password.
+    """
+    init_login_page.forgot_password()
+    expect(init_login_page.page).to_have_url("/forget-password")
+
 
