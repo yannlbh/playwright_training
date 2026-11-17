@@ -176,9 +176,7 @@ def test_TC07_clear_form(init_form_page):
     for checkBox in [init_form_page.pref_comm_method_phone,init_form_page.pref_comm_method_email]:
         expect(checkBox).not_to_be_checked()
 
-
-
-def test_TC08_exlusive_radio_button(init_form_page):
+def test_TC08_exclusive_radio_button(init_form_page):
     """
 
     :param init_form_page:
@@ -190,4 +188,7 @@ def test_TC08_exlusive_radio_button(init_form_page):
     Expected: Only Phone stays selected; the two radios are mutually exclusive.
 
     """
-    pass
+    init_form_page.pref_comm_method_email.check()
+    init_form_page.pref_comm_method_phone.check()
+    expect(init_form_page.pref_comm_method_phone).to_be_checked()
+
