@@ -115,7 +115,6 @@ def test_TC04_invalid_doj(init_form_page):
     init_form_page.submit()
     expect(init_form_page.get_error_message_locator("Date of Joining format should be dd/mm/yyyy")).to_be_visible()
 
-
 def test_TC05_missing_comm_pref(init_form_page):
     """
 
@@ -129,7 +128,10 @@ def test_TC05_missing_comm_pref(init_form_page):
     Expected: Error "Please select a Communication Preference" is shown.
 
     """
-    pass
+    init_form_page.fill_form(VALID_COUNTRY, VALID_TITLE, VALID_FIRST_NAME, VALID_LAST_NAME, VALID_DOB, VALID_DOJ,
+                             VALID_EMAIL, VALID_PHONE_CODE, VALID_PHONE_NUMBER)
+    init_form_page.submit()
+    expect(init_form_page.get_error_message_locator("Please select a Communication Preference")).to_be_visible()
 
 def test_TC06_country_dropdown_op(init_form_page):
     """
